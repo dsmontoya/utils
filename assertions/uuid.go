@@ -3,7 +3,7 @@ package assertions
 import (
 	"fmt"
 
-	"github.com/entropyx/tools/uuidutils"
+	"github.com/dsmontoya/utils/uuidutils"
 )
 
 func ShouldBeUUID(actual interface{}, expected ...interface{}) string {

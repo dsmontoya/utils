@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/entropyx/tools/intutils"
+	"github.com/dsmontoya/utils/intutils"
 )
 
 var allChars = append(alphaNum, symbols...)

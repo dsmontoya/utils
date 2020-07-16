@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/entropyx/tools/strutils"
+	"github.com/dsmontoya/utils/strutils"
 )
 
 // ToStringMap copies a struct into a map[string]string, where the

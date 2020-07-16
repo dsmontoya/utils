@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/entropyx/tools/internal"
+	"github.com/dsmontoya/utils/internal"
 )
 
 // GroupDigits groups each n digits of a number from right to left. Use sep as the seperator for each group.

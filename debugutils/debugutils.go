@@ -7,7 +7,7 @@ import (
 
 const (
 	stackFuncRuntime    = "runtime/debug.Stack"
-	stackFuncDebugutils = "github.com/entropyx/tools/debugutils.Stack"
+	stackFuncDebugutils = "github.com/dsmontoya/utils/debugutils.Stack"
 )
 
 func Stack() string {

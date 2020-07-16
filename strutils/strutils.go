@@ -5,7 +5,8 @@ import (
 	"regexp"
 	"unicode"
 	"unicode/utf8"
-	"github.com/entropyx/tools/internal"
+
+	"github.com/dsmontoya/utils/internal"
 )
 
 // Copy makes a copy of a string
