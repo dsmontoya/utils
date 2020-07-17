@@ -2,6 +2,7 @@ package strutils
 
 import (
 	"testing"
+	"time"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -18,6 +19,18 @@ func TestRand(t *testing.T) {
 
 		Convey("They should not be the same", func() {
 			So(s1, ShouldNotEqual, s2)
+		})
+	})
+
+	Convey("When too many strings are generated", t, func() {
+		start := time.Now()
+		for i := 0; i < 4500; i++ {
+			Rand(10)
+		}
+		end := time.Now()
+
+		Convey("The operation should not take more than 10 miliseconds", func() {
+			So(start, ShouldHappenWithin, 10*time.Millisecond, end)
 		})
 	})
 }

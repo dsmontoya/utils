@@ -3,7 +3,6 @@ package intutils
 import (
 	"math/rand"
 	"strconv"
-	"time"
 
 	"github.com/dsmontoya/utils/internal"
 )
@@ -16,7 +15,6 @@ func GroupDigits(number int, sep string, n int) string {
 
 // RandInt returns a random integer between min and max
 func RandInt(min int, max int) int {
-	rand.Seed(time.Now().UnixNano())
 	return min + rand.Intn(max-min)
 }
 

@@ -1,9 +1,6 @@
 package strutils
 
 import (
-	"math/rand"
-	"time"
-
 	"github.com/dsmontoya/utils/intutils"
 )
 
@@ -18,7 +15,6 @@ var uppercaseLetters = []byte{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
 //Rand generates a random string with l length
 func Rand(l int) string {
 	s := make([]byte, l)
-	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < l; i++ {
 		n := intutils.RandUint(0, uint(len(allChars)-1))
 		s[i] = allChars[n]
