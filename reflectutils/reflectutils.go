@@ -28,15 +28,15 @@ func Each(a interface{}, f func(i int, v reflect.Value) bool) {
 	}
 }
 
-func SetSlice(slice interface{}, index int, x interface{}) {
-	v := reflect.ValueOf(slice)
-	item := DeepValue(v).Index(index)
-	item.Set(reflect.ValueOf(x))
-}
-
 //SetField sets value to the specified field in container.
 func SetField(container interface{}, name string, value interface{}) {
 	v := DeepValue(reflect.ValueOf(container))
 	field := DeepValue(v.FieldByName(name))
 	field.Set(reflect.ValueOf(value))
+}
+
+func SetSlice(slice interface{}, index int, x interface{}) {
+	v := reflect.ValueOf(slice)
+	item := DeepValue(v).Index(index)
+	item.Set(reflect.ValueOf(x))
 }
