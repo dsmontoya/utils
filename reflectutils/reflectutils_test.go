@@ -117,3 +117,32 @@ func TestEach(t *testing.T) {
 		})
 	}
 }
+
+func TestSetField(t *testing.T) {
+	numberPointer := 5
+	type strct struct {
+		Number    int
+		NumberPtr *int
+	}
+	type args struct {
+		container interface{}
+		name      string
+		value     interface{}
+	}
+	tests := []struct {
+		name string
+		args args
+		want interface{}
+	}{
+		{"set Number", args{&strct{Number: 1}, "Number", 5}, &strct{Number: 5}},
+		{"set NumberPtr", args{&strct{NumberPtr: new(int)}, "NumberPtr", 5}, &strct{NumberPtr: &numberPointer}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SetField(tt.args.container, tt.args.name, tt.args.value)
+			if !reflect.DeepEqual(tt.args.container, tt.want) {
+				t.Errorf("container = %v, want %v", tt.args.container, tt.want)
+			}
+		})
+	}
+}

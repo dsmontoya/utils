@@ -33,3 +33,10 @@ func SetSlice(slice interface{}, index int, x interface{}) {
 	item := DeepValue(v).Index(index)
 	item.Set(reflect.ValueOf(x))
 }
+
+//SetField sets value to the specified field in container.
+func SetField(container interface{}, name string, value interface{}) {
+	v := DeepValue(reflect.ValueOf(container))
+	field := DeepValue(v.FieldByName(name))
+	field.Set(reflect.ValueOf(value))
+}
