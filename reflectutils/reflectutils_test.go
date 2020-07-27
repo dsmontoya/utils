@@ -64,3 +64,27 @@ func TestDeepValue(t *testing.T) {
 		})
 	})
 }
+
+func TestSetSlice(t *testing.T) {
+	type args struct {
+		slice interface{}
+		index int
+		x     interface{}
+	}
+	tests := []struct {
+		name string
+		args args
+		want interface{}
+	}{
+		{"[]int without pointer", args{[]int{1, 2, 3}, 0, 5}, []int{5, 2, 3}},
+		{"[]int with pointer", args{&[]int{1, 2, 3}, 0, 5}, &[]int{5, 2, 3}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SetSlice(tt.args.slice, tt.args.index, tt.args.x)
+			if !reflect.DeepEqual(tt.args.slice, tt.want) {
+				t.Errorf("slice = %v, want %v", tt.args.slice, tt.want)
+			}
+		})
+	}
+}

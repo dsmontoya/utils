@@ -13,3 +13,9 @@ func DeepValue(v reflect.Value) reflect.Value {
 	}
 	return v
 }
+
+func SetSlice(slice interface{}, index int, x interface{}) {
+	v := reflect.ValueOf(slice)
+	item := DeepValue(v).Index(index)
+	item.Set(reflect.ValueOf(x))
+}
