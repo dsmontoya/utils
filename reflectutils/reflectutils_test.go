@@ -99,18 +99,17 @@ func TestEach(t *testing.T) {
 		limit int
 	}{
 		{"break after slice[1]", args{[]int{1, 2, 3, 4}}, 1},
+		{"break after slice[len(slice)-1]", args{[]int{1, 2, 3, 4}}, 3},
 	}
 	for _, tt := range tests {
-		count := 0
 		f := func(i int, item reflect.Value) bool {
-			if i == tt.limit {
+			if i+1 == tt.limit {
 				return false
 			}
-			count++
 			return true
 		}
 		t.Run(tt.name, func(t *testing.T) {
-			Each(tt.args.slice, f)
+			count := Each(tt.args.slice, f)
 			if count != tt.limit {
 				t.Errorf("count = %v, want %v", count, tt.limit)
 			}
