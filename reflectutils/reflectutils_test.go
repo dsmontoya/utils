@@ -120,8 +120,9 @@ func TestEach(t *testing.T) {
 func TestSetField(t *testing.T) {
 	numberPointer := 5
 	type strct struct {
-		Number    int
-		NumberPtr *int
+		Number     int
+		NumberPtr  *int
+		unexported int
 	}
 	type args struct {
 		container interface{}
@@ -129,18 +130,24 @@ func TestSetField(t *testing.T) {
 		value     interface{}
 	}
 	tests := []struct {
-		name string
-		args args
-		want interface{}
+		name      string
+		args      args
+		want      bool
+		wantValue interface{}
 	}{
-		{"set Number", args{&strct{Number: 1}, "Number", 5}, &strct{Number: 5}},
-		{"set NumberPtr", args{&strct{NumberPtr: new(int)}, "NumberPtr", 5}, &strct{NumberPtr: &numberPointer}},
+		{"Number", args{&strct{Number: 1}, "Number", 5}, true, &strct{Number: 5}},
+		{"NumberPtr", args{&strct{NumberPtr: new(int)}, "NumberPtr", 5}, true, &strct{NumberPtr: &numberPointer}},
+		{"no ptr", args{strct{NumberPtr: new(int)}, "NumberPtr", 5}, false, strct{NumberPtr: new(int)}},
+		{"Unknown", args{&strct{Number: 1}, "Unkown", 5}, false, &strct{Number: 1}},
+		{"Unexported", args{&strct{Number: 1}, "unexported", 5}, false, &strct{Number: 1}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			SetField(tt.args.container, tt.args.name, tt.args.value)
-			if !reflect.DeepEqual(tt.args.container, tt.want) {
-				t.Errorf("container = %v, want %v", tt.args.container, tt.want)
+			if got := SetField(tt.args.container, tt.args.name, tt.args.value); got != tt.want {
+				t.Errorf("got = %v, want %v", got, tt.want)
+			}
+			if !reflect.DeepEqual(tt.args.container, tt.wantValue) {
+				t.Errorf("container = %v, want %v", tt.args.container, tt.wantValue)
 			}
 		})
 	}
